@@ -1,1 +1,147 @@
-# sorry
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm Sorry 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+  color:#fff;
+}
+.container{
+  max-width:800px;
+  text-align:center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius:25px;
+  padding:40px 30px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  position:relative;
+}
+h1{
+  font-family:'Great Vibes', cursive;
+  font-size:48px;
+  margin-bottom:10px;
+  color:#ff6f91;
+  text-shadow: 0 0 8px #ffb6c1;
+}
+p{
+  font-size:18px;
+  line-height:1.7;
+  color:#fff;
+  margin:15px 0;
+}
+button{
+  background:linear-gradient(45deg,#ff8ba7,#ffb6c1);
+  border:none;
+  color:#fff;
+  padding:12px 25px;
+  font-size:18px;
+  border-radius:15px;
+  margin:10px;
+  cursor:pointer;
+  box-shadow: 0 0 12px rgba(255,182,193,0.6);
+  transition: transform 0.3s;
+}
+button:hover{transform:scale(1.05);}
+.hidden{display:none;}
+/* floating hearts */
+.heart{
+  position:absolute;
+  font-size:24px;
+  color:rgba(255, 182, 193,0.7);
+  pointer-events:none;
+  animation:float linear infinite;
+}
+@keyframes float{
+  0%{transform:translateY(100vh);}
+  100%{transform:translateY(-10vh);}
+}
+/* game area */
+#gameBox{
+  position:relative;
+  height:220px;
+  margin-top:20px;
+}
+#noBtn{position:absolute;}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <section id="page1">
+    <h1>Hey My Love 💖</h1>
+    <p>I know I hurt you and I’m really sorry.<br>Before anything else, I just want you to know how much you mean to me.</p>
+    <button onclick="next(2)">Continue</button>
+  </section>
+
+  <section id="page2" class="hidden">
+    <h1>My Apology 🥺</h1>
+    <p>I may not be perfect, but my heart is yours.<br>I regret every moment that made you sad.<br>Please give me a chance to make it right.</p>
+    <button onclick="next(3)">Play the Game 💕</button>
+    <button onclick="next(1)">Back</button>
+  </section>
+
+  <section id="page3" class="hidden">
+    <h1>Will You Forgive Me? 💕</h1>
+    <p>Click <strong>Yes</strong> if you forgive me… but the <strong>No</strong> button might not cooperate 😅</p>
+    <div id="gameBox">
+      <button id="yesBtn" onclick="next(4)">Yes 💖</button>
+      <button id="noBtn">No 🙈</button>
+    </div>
+    <button onclick="next(2)">Back</button>
+  </section>
+
+  <section id="page4" class="hidden">
+    <h1>Thank You! 🥰</h1>
+    <p>Your forgiveness means everything.<br>I promise to love you more and never hurt you again.</p>
+  </section>
+</div>
+
+<script>
+let current=1;
+function next(n){
+  document.getElementById('page'+current).classList.add('hidden');
+  document.getElementById('page'+n).classList.remove('hidden');
+  current=n;
+}
+
+// floating hearts background
+for(let i=0;i<40;i++){
+  let h=document.createElement('div');
+  h.className='heart';
+  h.textContent='❤';
+  h.style.left=Math.random()*100+'%';
+  h.style.animationDuration=(5+Math.random()*5)+'s';
+  h.style.fontSize=20+Math.random()*15+'px';
+  document.body.appendChild(h);
+}
+
+// playful NO button
+const noBtn=document.getElementById('noBtn');
+const gameBox=document.getElementById('gameBox');
+
+function randomPos(){
+  const boxRect=gameBox.getBoundingClientRect();
+  const x=Math.random()*(boxRect.width-80);
+  const y=Math.random()*(boxRect.height-40);
+  noBtn.style.left=x+'px';
+  noBtn.style.top=y+'px';
+}
+randomPos();
+
+noBtn.addEventListener('mouseenter',randomPos);
+noBtn.addEventListener('click',randomPos); 
+</script>
+
+</body>
+</html>
